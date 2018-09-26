@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 export cluster_name=$1
-export host=$(curl http://169.254.169.254/latest/meta-data/public-hostname)
+export knox_host=$(curl http://169.254.169.254/latest/meta-data/public-hostname)
+export host=$(hostname -f)
 export ambari_pass=$2
 
 echo "Enable service discovery for knox" ##new feature in HDP 3.0
@@ -79,7 +80,7 @@ cat << EOF > cookieprovider.xml
         <enabled>true</enabled>
         <param>
             <name>sso.authentication.provider.url</name>
-            <value>https://${host}:8443/gateway/knoxsso/api/v1/websso</value>
+            <value>https://${knox_host}:8443/gateway/knoxsso/api/v1/websso</value>
         </param>
     </provider>
     <provider>
