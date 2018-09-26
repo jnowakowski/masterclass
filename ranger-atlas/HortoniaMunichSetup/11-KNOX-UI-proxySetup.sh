@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 export cluster_name=$1
-export host=$(hostname -f)
+export host=$(curl http://169.254.169.254/latest/meta-data/public-hostname)
 export ambari_pass=$2
 
 echo "Enable service discovery for knox" ##new feature in HDP 3.0
