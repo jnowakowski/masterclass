@@ -59,7 +59,7 @@ curl -sSL https://raw.githubusercontent.com/seanorama/ambari-bootstrap/master/ex
 
 #download hortonia scripts
 cd /tmp
-git clone https://github.com/abajwa-hw/masterclass  
+git clone -b patch-1 https://github.com/jnowakowski/masterclass.git 
 
 cd /tmp/masterclass/ranger-atlas/HortoniaMunichSetup
 chmod +x *.sh
