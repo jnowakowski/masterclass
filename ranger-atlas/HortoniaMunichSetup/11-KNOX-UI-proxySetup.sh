@@ -39,7 +39,7 @@ sleep 30
 cd /tmp
 cat << EOF > ui.json
 {
-  "discovery-address":"http://${host}:8080",
+  "discovery-address":"http://demo.hortonworks.com:8080",
   "provider-config-ref":"cookieprovider",
   "discovery-user":"admin",
   "cluster":"${cluster_name}",
@@ -64,9 +64,9 @@ cat << EOF > ui.json
     {"name":"ZEPPELINUI"},
     {"name":"ZEPPELINWS"},
     {"name":"SPARKHISTORYUI"},
-    {"name":"AMBARI","urls":["http://${host}:8080"]},
-    {"name":"AMBARIUI","urls":["http://${host}:8080"]},
-    {"name":"AMBARIWS","urls":["ws://${host}:8080"]}
+    {"name":"AMBARI","urls":["http://demo.hortonworks.com:8080"]},
+    {"name":"AMBARIUI","urls":["http://demo.hortonworks.com:8080"]},
+    {"name":"AMBARIWS","urls":["ws://demo.hortonworks.com:8080"]}
   ]
 }
 EOF
