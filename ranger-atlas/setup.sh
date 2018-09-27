@@ -304,10 +304,11 @@ EOF
 /var/lib/ambari-server/resources/scripts/configs.py -u admin -p ${ambari_pass} --host localhost --port 8080 --cluster ${cluster_name} -a set -c zeppelin-shiro-ini -f /tmp/zeppelin-env.json
 sleep 5
 
+# Install shell interpreter into Zeppelin
+/usr/hdp/current/zeppelin-server/bin/install-interpreter.sh --name shell
 
-
-  #restart Zeppelin
-  sudo curl -u admin:${ambari_pass} -H 'X-Requested-By: blah' -X POST -d "
+#restart Zeppelin
+sudo curl -u admin:${ambari_pass} -H 'X-Requested-By: blah' -X POST -d "
 {
 \"RequestInfo\":{
   \"command\":\"RESTART\",
