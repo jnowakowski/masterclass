@@ -77,7 +77,7 @@ keytool -genkey -alias knoxidentity -keyalg RSA -keysize 1024 -dname CN=knoxiden
 keytool -export -alias knoxidentity -keystore /tmp/knoxidentity.jks -rfc -file knox.cert -storepass knoxsecret
 #Certificate to distribute to services
 knox_cert=$(cat /tmp/knox.cert | grep -v "BEGIN CERTIFICATE" | grep -v "END CERTIFICATE"|sed 's/\r//g' )
-knox_hostname=$(curl http://169.254.169.254/latest/meta-data/public-hostname)
+knox_hostname=demo.hortonworks.com
 #Provider URL for SSO
 knox_sso_url="https://${knox_hostname}:8443/gateway/knoxsso/api/v1/websso"
 
