@@ -39,7 +39,7 @@ export deploy=true
 
 export host=$(hostname -f)
 export ambari_host=$(hostname -f)
-
+export knox_host=demo.hortonworks.com
 export install_ambari_server ambari_pass host_count ambari_services
 export ambari_password cluster_name recommendation_strategy
 
@@ -692,7 +692,7 @@ if [ "${enable_knox_sso_proxy}" = true  ]; then
   ./11-KNOX-UI-proxySetup.sh ${cluster_name} ${ambari_pass}
 
   #echo "Setting up Zeppelin SSO"
-  ./12-enable-zeppelin_SSO.sh ${cluster_name} ${ambari_pass} "https://demo.hortonworks.com:8443/gateway/knoxsso/api/v1/websso"
+  ./12-enable-zeppelin_SSO.sh ${cluster_name} ${ambari_pass} "https://${knox_host}:8443/gateway/knoxsso/api/v1/websso"
   
   #when using SSO, startup script shouldn't change Ambari pass
   touch /root/.firstbootdone

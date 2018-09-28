@@ -80,7 +80,7 @@ cat << EOF > cookieprovider.xml
         <enabled>true</enabled>
         <param>
             <name>sso.authentication.provider.url</name>
-            <value>https://demo.hortonworks.com:8443/gateway/knoxsso/api/v1/websso</value>
+            <value>https://${knox_host}:8443/gateway/knoxsso/api/v1/websso</value>
         </param>
     </provider>
     <provider>
