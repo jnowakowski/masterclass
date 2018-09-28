@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 export cluster_name=$1
+export knox_host=demo.hortonworks.com
 export host=$(hostname -f)
 export ambari_pass=$2
 
@@ -79,7 +80,7 @@ cat << EOF > cookieprovider.xml
         <enabled>true</enabled>
         <param>
             <name>sso.authentication.provider.url</name>
-            <value>https://${host}:8443/gateway/knoxsso/api/v1/websso</value>
+            <value>https://${knox_host}:8443/gateway/knoxsso/api/v1/websso</value>
         </param>
     </provider>
     <provider>

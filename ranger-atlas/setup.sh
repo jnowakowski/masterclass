@@ -39,7 +39,7 @@ export deploy=true
 
 export host=$(hostname -f)
 export ambari_host=$(hostname -f)
-
+export knox_host=demo.hortonworks.com
 export install_ambari_server ambari_pass host_count ambari_services
 export ambari_password cluster_name recommendation_strategy
 
@@ -59,7 +59,7 @@ curl -sSL https://raw.githubusercontent.com/seanorama/ambari-bootstrap/master/ex
 
 #download hortonia scripts
 cd /tmp
-git clone https://github.com/abajwa-hw/masterclass  
+git clone -b patch-1 https://github.com/jnowakowski/masterclass.git 
 
 cd /tmp/masterclass/ranger-atlas/HortoniaMunichSetup
 chmod +x *.sh
@@ -304,10 +304,11 @@ EOF
 /var/lib/ambari-server/resources/scripts/configs.py -u admin -p ${ambari_pass} --host localhost --port 8080 --cluster ${cluster_name} -a set -c zeppelin-shiro-ini -f /tmp/zeppelin-env.json
 sleep 5
 
+# Install shell interpreter into Zeppelin
+/usr/hdp/current/zeppelin-server/bin/install-interpreter.sh --name shell
 
-
-  #restart Zeppelin
-  sudo curl -u admin:${ambari_pass} -H 'X-Requested-By: blah' -X POST -d "
+#restart Zeppelin
+sudo curl -u admin:${ambari_pass} -H 'X-Requested-By: blah' -X POST -d "
 {
 \"RequestInfo\":{
   \"command\":\"RESTART\",
@@ -691,7 +692,7 @@ if [ "${enable_knox_sso_proxy}" = true  ]; then
   ./11-KNOX-UI-proxySetup.sh ${cluster_name} ${ambari_pass}
 
   #echo "Setting up Zeppelin SSO"
-  ./12-enable-zeppelin_SSO.sh ${cluster_name} ${ambari_pass} "https://$(hostname -f):8443/gateway/knoxsso/api/v1/websso"
+  ./12-enable-zeppelin_SSO.sh ${cluster_name} ${ambari_pass} "https://${knox_host}:8443/gateway/knoxsso/api/v1/websso"
   
   #when using SSO, startup script shouldn't change Ambari pass
   touch /root/.firstbootdone
